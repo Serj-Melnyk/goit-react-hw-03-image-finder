@@ -1,29 +1,31 @@
-import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
-import { Component } from "react"
-import { ImageList } from "./ImageGalleryStyled"
+import { Component } from "react";
+import { ImageList } from "./ImageGalleryStyled";
+import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 
 export class ImageGallery extends Component {
- 
+    state = {
+        // value: ''
+    }
+
+    componentDidUpdate(prevProps, prevState) { 
+        if (prevProps.value !== this.props.value) {
+            // this.setState(this.value)
+            console.log(this.props.value);
+        }
+    } 
+
 
     render() {
 
-        const { images } = this.props
-        
-
         return (
+
+
             <ImageList className="gallery">
-                {images.map((image) => {
-                    return (
-                        // <li key={img.id}>
-                        <ImageGalleryItem
-                            key={image.id}
-                            image={image}
-                    
-                                         />
-                        // </li>
-                    )
-                })}
+
+                <ImageGalleryItem />
+
             </ImageList>
-        )
+
+        );
     }
-}
+};

@@ -1,75 +1,69 @@
-import { Formik } from "formik";
-import { Form, ErrorMessage, Field, Button, SearchHead} from "./SearchbarStyled";
-import * as Yup from "yup"
-import { nanoid } from 'nanoid';
+
+import { Form, Field, Button, SearchHead} from "./SearchbarStyled";
 import { GoSearch } from "react-icons/go";
 
-
-const SearchShema = Yup.object().shape({
-
-    name: Yup.string().trim().min(2, 'Too Short!').max(50, 'Too Long!')
-        // .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-        //  "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan")
-    .required('Required'),
+import { Component } from "react";
 
 
-    
-
- });
-
-export const Searchbar = ({ onSubmit }) => {
-    
-    return (
-
-        <SearchHead>
+export class Searchbar extends Component {
+    state = {
+        value: ''
+    }
 
 
-            <Formik
-            
-            
-                initialValues={{
-                    name: '',
-                    image: ''
-        
-                }}
-
-                validationSchema={SearchShema}
-
-
-                onSubmit={(values, actions) => {
-            
-                    onSubmit({
-                        ...values,
-                        id: nanoid(),
-                    });
-                    actions.resetForm()
-                }}
-            >
-
+    handleChange = ({ target: { value } }) => {
+        // console.log(value);
+   
+        this.setState({ value })
            
+    }
 
-                <Form>
+    handleSubmit = (evt) => {
+        evt.preventDefault()
+        this.props.onSubmit(this.state.value)
+        this.setState({value : ''})
+        
+    }
+    
 
-                    <Button type='submit'>
-                        <GoSearch />
+
+
+    
+    render() {
+
+
+        return (
+
+            <SearchHead className="searchbar">
+                <Form
+                    
+                    onSubmit={this.handleSubmit}
+                    
+                    className="form">
+
+                    
+
+
+                    <Button type="submit" className="button">
+                        <span className="button-label"> <GoSearch /> </span>
                     </Button>
 
-                    {/* <FormLabel>
-                        Name */}
-                    <Field name="name" type="text" placeholder="Search images and photos" />
-                        <ErrorMessage name="name" component={'div'} />
-                    {/* </FormLabel> */}
-
-                
-
-
-                </Form>
-
-            </Formik >
+                    <Field
+                        className="input"
+                        type="text"
+                        aria-label="search"
+                        placeholder="Search images and photos"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        
         
-        </SearchHead>
+                        
 
-    );
+                    />
+                </Form>
+            </SearchHead>
+            
+        );
+    }
+};
 
-
-}

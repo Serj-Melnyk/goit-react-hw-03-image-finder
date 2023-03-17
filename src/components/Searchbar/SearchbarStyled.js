@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import {
-  Form as FormFormik,
-  ErrorMessage as ErrorFormik,
-  Field as FieldFormik,
-} from 'formik';
+// import {
+//   Form as FormFormik,
+//   ErrorMessage as ErrorFormik,
+//   Field as FieldFormik,
+// } from 'formik';
 
 export const SearchHead = styled.header`
   top: 0;
@@ -25,7 +25,7 @@ export const SearchHead = styled.header`
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
 
-export const Form = styled(FormFormik)`
+export const Form = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
@@ -46,9 +46,9 @@ export const Form = styled(FormFormik)`
 //   overflow: hidden;
 // `;
 
-export const ErrorMessage = styled(ErrorFormik)``;
+// export const ErrorMessage = styled(ErrorFormik)``;
 
-export const Field = styled(FieldFormik)`
+export const Field = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;

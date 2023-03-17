@@ -5,6 +5,7 @@ export const Layout = ({ children }) => {
         <Container>
             
             <div>{children}</div>
+            
         </Container>
 
     )

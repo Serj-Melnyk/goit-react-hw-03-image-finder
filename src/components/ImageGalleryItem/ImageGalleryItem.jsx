@@ -1,15 +1,29 @@
-import { ImageItem } from "./ImageGalleryItemStyled";
+import { Component } from "react";
+import { ImageItem, Img } from "./ImageGalleryItemStyled";
 
-export const ImageGalleryItem = ({ }) => {
 
-    // render()
-    // {
-        return (
+export class ImageGalleryItem extends Component {
 
-            <ImageItem className="gallery-item">
-                  <img src="" alt="" />
+
+    state = {
+        
+    }
+
+    render() {
+
+        const { image: { id, webformatURL } } = this.props
+
+        return  (
+
+            <ImageItem 
+                key={id}>
+                
+                <Img src={webformatURL} alt="" />
+                
             </ImageItem>
 
         );
-    // }
+
+    } 
+    
 };

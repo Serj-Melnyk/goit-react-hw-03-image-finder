@@ -9,8 +9,11 @@ export class ImageGallery extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) { 
-        if (prevProps.value !== this.props.value || 
-            prevProps.value == this.props.value) {
+        if (prevProps.value !== this.props.value
+            // || 
+            // prevProps.value == this.props.value
+        )
+        {
             
             getImages(this.props.value)
                 .then((response) => response.json())

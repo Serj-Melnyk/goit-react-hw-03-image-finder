@@ -3,7 +3,7 @@ import { ImageList } from "./ImageGalleryStyled";
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 import { getImages } from "components/services/GetImages";
 import { ThreeDots } from "components/Loader/LoaderStyled"; 
-import { ErrorMessage } from "formik";
+
 
 
 

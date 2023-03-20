@@ -2,7 +2,9 @@
 import { Form, Field, Button, SearchHead} from "./SearchbarStyled";
 import { GoSearch } from "react-icons/go";
 
+
 import { Component } from "react";
+import { toast } from "react-hot-toast";
 
 
 export class Searchbar extends Component {
@@ -20,6 +22,10 @@ export class Searchbar extends Component {
 
     handleSubmit = (evt) => {
         evt.preventDefault()
+        if (!this.state.value.trim()) {
+            return toast.success('The search field is empty');
+         
+        }
         this.props.onSubmit(this.state.value)
         this.setState({value : ''})
         
@@ -30,6 +36,7 @@ export class Searchbar extends Component {
 
     
     render() {
+        
 
 
         return (
@@ -40,6 +47,8 @@ export class Searchbar extends Component {
                     onSubmit={this.handleSubmit}
                     
                     className="form">
+                    
+                   
 
                     
 

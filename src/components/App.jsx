@@ -4,6 +4,9 @@ import { GlobalStyle } from "./GlobalStyle";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Layout } from "./Layout/Layout";
 import { Searchbar } from "./Searchbar/Searchbar";
+import { Toaster } from "react-hot-toast";
+import { Button } from "./Button/Button";
+
 
 
 export class App extends Component {
@@ -19,20 +22,30 @@ export class App extends Component {
 }
 
 
+
   render() {
-
-    // console.log('state :>> ', this.state);
-
-
 
 
     return (
 
-    <Layout>
+      
+      <Layout>  
+        
+        <Toaster
+        position="top-right"
+          reverseOrder={false}
+        />
         
         <Searchbar onSubmit={this.handleSubmit} />
 
-        <ImageGallery value={this.state.textSearch } />
+        <ImageGallery value={this.state.textSearch} />
+        
+        {this.state.textSearch && <Button text="Load more" />}
+
+
+       
+
+
       
         <GlobalStyle />
         

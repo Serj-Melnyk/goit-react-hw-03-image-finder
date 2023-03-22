@@ -25,3 +25,10 @@ export const ButtonMore = styled.button`
     background-color: #303f9f;
   }
 `;
+
+export const ButtonCentre = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+`;

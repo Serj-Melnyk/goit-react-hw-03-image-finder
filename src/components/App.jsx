@@ -5,7 +5,8 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { Layout } from "./Layout/Layout";
 import { Searchbar } from "./Searchbar/Searchbar";
 import { Toaster } from "react-hot-toast";
-import { Button } from "./Button/Button";
+import { Modal } from "./Modal/Modal";
+
 
 
 
@@ -13,38 +14,50 @@ export class App extends Component {
 
 
   state = {
-    textSearch: ''
+    textSearch: '',
+    showModal: false,
   
   };
 
-  handleSubmit = (textSearch) => {
-  this.setState({textSearch})
-}
+  togleModal = () => {
+    this.setState(({ showModal })=> ({
+      showModal: !showModal
+    }))
+  };
 
+
+  handleSubmit = (textSearch) => {
+    this.setState({ textSearch })
+  };
+
+  
 
 
   render() {
+    
+    const { textSearch, showModal } = this.state
 
 
     return (
 
       
       <Layout>  
+
+        { showModal && < Modal largeImg={this.props.largeImageURL} /> }
+
         
+        
+
+
         <Toaster
-        position="top-right"
-          reverseOrder={false}
+           position="top-right"
+           reverseOrder={false}
         />
         
         <Searchbar onSubmit={this.handleSubmit} />
 
-        <ImageGallery value={this.state.textSearch} />
-        
-        {this.state.textSearch && <Button text="Load more" />}
-
-
-       
-
+        <ImageGallery value={textSearch} />
+    
 
       
         <GlobalStyle />

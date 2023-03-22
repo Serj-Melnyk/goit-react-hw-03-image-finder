@@ -48,10 +48,6 @@ export class Searchbar extends Component {
                     
                     className="form">
                     
-                   
-
-                    
-
 
                     <Button type="submit" className="button">
                         <span className="button-label"> <GoSearch /> </span>

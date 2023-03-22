@@ -1,12 +1,12 @@
-import { ButtonMore } from "./ButtonStyled"
+import { ButtonMore, ButtonCentre } from "./ButtonStyled"
 
 export const Button = ({text}) => {
     return (
 
-        
-        <div>
+
+        <ButtonCentre>
              <ButtonMore type="button">{ text }</ButtonMore>
-        </div>
+        </ButtonCentre>
 
        
     )

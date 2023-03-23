@@ -11,7 +11,7 @@ export class ImageGalleryItem extends Component {
 
     render() {
 
-        const { image: { webformatURL , largeImageURL} } = this.props
+        const { image: { webformatURL } } = this.props
 
         return  (
 

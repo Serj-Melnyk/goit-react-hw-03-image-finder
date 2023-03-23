@@ -19,7 +19,7 @@ export class App extends Component {
   
   };
 
-  togleModal = () => {
+  toggleModal = () => {
     this.setState(({ showModal })=> ({
       showModal: !showModal
     }))
@@ -43,10 +43,14 @@ export class App extends Component {
       
       <Layout>  
 
-        { showModal && < Modal largeImg={this.props.largeImageURL} /> }
+        {showModal && (< Modal
+          
+          onClose={this.toggleModal}>
 
-        
-        
+        </Modal>)}
+
+
+        <button type="button" onClick={this.toggleModal}>Open modal</button>
 
 
         <Toaster
@@ -57,6 +61,10 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSubmit} />
 
         <ImageGallery value={textSearch} />
+
+
+
+      
     
 
       

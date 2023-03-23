@@ -4,6 +4,7 @@ import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 import { getImages } from "components/services/GetImages";
 import { threeDots } from "components/Loader/Loader";
 import { Button } from "components/Button/Button";
+import { toast } from "react-hot-toast";
 
 
 
@@ -16,6 +17,7 @@ export class ImageGallery extends Component {
         // loading: false,
         error: '',
         loadButton: false,
+        // page: 1,
         status: 'idle'
 
     }
@@ -35,11 +37,12 @@ export class ImageGallery extends Component {
             getImages(this.props.value)
                 .then((response) => response.json())
                 .then((images) => {
-                    if (!images.status === 'ok') {
-                    return Promise.reject(new Error(images.status))
+                    if (images.status !== 'ok') {
+                    return Promise.reject(toast.error('Bad request'))
                     }
                    
                     this.setState({ images, status: 'resolved' })
+            
                     
                     if (images.hits.length !== 12) {
                     return this.setState({ loadButton: false })
@@ -50,17 +53,33 @@ export class ImageGallery extends Component {
                 })
                 
 
-          .catch((error) => {
-                //   console.log('error :>> ', error);
+          .catch((error)  => {
+                  console.log('error :>> ', error)
               this.setState({error, status: 'rejected'})
-              })
+             })
             
      
          }       
           
-    } 
+    }
+
+    // addLoadPage = () => {
+    //     this.setState((prevState) => {
+    //         return {page: prevState.page + 1}
+            
+    //     });
+    // };
+        
+    // onLoadMoreBtn = () => {
+    // this.setState(prevState => ({
+    //   page: prevState.page + 1,
+    //   loading: true,
+    // }));
+
+
 
     render() {
+        
         if (this.state.status === 'pending') {
             return threeDots 
         }
@@ -84,7 +103,9 @@ export class ImageGallery extends Component {
                     )
                 })}
 
-                {this.state.loadButton && <Button text="Load more" /> }
+              {this.state.loadButton && <Button text="Load more"
+            //   onClick={this.addLoadPage}
+              />}
        
 
             </ImageList>
@@ -92,7 +113,8 @@ export class ImageGallery extends Component {
         }
 
         if (this.state.status === 'rejected') {
-            return <h2>...OOPS</h2>
+            return (<h2>{this.state.error }</h2>)
+           
         }
         
     }

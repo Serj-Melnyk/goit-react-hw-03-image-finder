@@ -11,14 +11,19 @@ export class ImageGalleryItem extends Component {
 
     render() {
 
-        const { image: { id, webformatURL } } = this.props
+        const { image: { webformatURL , largeImageURL} } = this.props
 
         return  (
 
-            <ImageItem 
-                key={id}>
+            <ImageItem>
                 
-                <Img src={webformatURL} alt="" />
+                
+                <Img
+                   
+                    // onClose={this.props.onClose}
+                    src={webformatURL} alt="picture"
+                    // imgUrl={largeImageURL}
+                />
                 
             </ImageItem>
 

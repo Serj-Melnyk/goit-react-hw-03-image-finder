@@ -42,13 +42,9 @@ export class Searchbar extends Component {
         return (
 
             <SearchHead className="searchbar">
-                <Form
-                    
-                    onSubmit={this.handleSubmit}
-                    
-                    className="form">
-                    
 
+                <Form onSubmit={this.handleSubmit}>
+                
                     <Button type="submit" className="button">
                         <span className="button-label"> <GoSearch /> </span>
                     </Button>
@@ -60,8 +56,6 @@ export class Searchbar extends Component {
                         placeholder="Search images and photos"
                         value={this.state.value}
                         onChange={this.handleChange}
-                        
-        
                         
 
                     />

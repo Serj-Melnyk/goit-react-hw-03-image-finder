@@ -46,6 +46,7 @@ export class App extends Component {
         {showModal && (< Modal
           
           onClose={this.toggleModal}>
+          {/* largeImageURL={largeImageURL} */}
 
         </Modal>)}
 

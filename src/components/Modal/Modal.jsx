@@ -40,8 +40,8 @@ export class Modal extends Component {
         return createPortal(<Overlay className="overlay" onClick={this.handleTabOverlay}>
 
             <ModalStyle className="modal">
-                {/* <img src={largeImageURL} alt="" /> */}
-                {this.props.children}
+                {this.props.largeImageURL} 
+                {/* {this.props.children} */}
             </ModalStyle>
                 
              </Overlay>, modalRoot);

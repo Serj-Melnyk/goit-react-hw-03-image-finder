@@ -8,8 +8,10 @@ import { toast } from "react-hot-toast";
 
 
 export class Searchbar extends Component {
+
     state = {
         value: ''
+        // page: 1,
     }
 
 

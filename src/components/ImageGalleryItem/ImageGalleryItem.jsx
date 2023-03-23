@@ -11,7 +11,7 @@ export class ImageGalleryItem extends Component {
 
     render() {
 
-        const { image: { webformatURL } } = this.props
+        const { image: { webformatURL ,largeImageURL} } = this.props
 
         return  (
 
@@ -22,7 +22,7 @@ export class ImageGalleryItem extends Component {
                    
                     // onClose={this.props.onClose}
                     src={webformatURL} alt="picture"
-                    // imgUrl={largeImageURL}
+                    largeImageURL={largeImageURL}
                 />
                 
             </ImageItem>

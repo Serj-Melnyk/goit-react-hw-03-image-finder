@@ -16,8 +16,8 @@ export class ImageGallery extends Component {
         images: null,
         // loading: false,
         error: '',
-        loadButton: false,
-        // page: 1,
+        // loadButton: false,
+        page: 1,
         status: 'idle'
 
     }
@@ -37,8 +37,8 @@ export class ImageGallery extends Component {
             getImages(this.props.value)
                 .then((response) => response.json())
                 .then((images) => {
-                    if (images.status !== 'ok') {
-                    return Promise.reject(toast.error('Bad request'))
+                    if (images.total === 0) {
+                    return Promise.reject(new Error (toast.error('Bad request')))
                     }
                    
                     this.setState({ images, status: 'resolved' })
@@ -63,12 +63,12 @@ export class ImageGallery extends Component {
           
     }
 
-    // addLoadPage = () => {
-    //     this.setState((prevState) => {
-    //         return {page: prevState.page + 1}
+    addLoadPage = () => {
+        this.setState((prevState) => {
+            return {page: prevState.page + 1}
             
-    //     });
-    // };
+        });
+    };
         
     // onLoadMoreBtn = () => {
     // this.setState(prevState => ({
@@ -104,7 +104,7 @@ export class ImageGallery extends Component {
                 })}
 
               {this.state.loadButton && <Button text="Load more"
-            //   onClick={this.addLoadPage}
+              addPageClick={this.addLoadPage}
               />}
        
 
@@ -112,10 +112,10 @@ export class ImageGallery extends Component {
             
         }
 
-        if (this.state.status === 'rejected') {
-            return (<h2>{this.state.error }</h2>)
+        // if (this.state.status === 'rejected') {
+        //     return (<h2>{this.state.error }</h2>)
            
-        }
+        // }
         
     }
 };

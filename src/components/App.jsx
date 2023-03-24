@@ -51,7 +51,7 @@ export class App extends Component {
         </Modal>)}
 
 
-        <button type="button" onClick={this.toggleModal}>Open modal</button>
+        {/* <button type="button" onClick={this.toggleModal}>Open modal</button> */}
 
 
         <Toaster
@@ -62,11 +62,6 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSubmit} />
 
         <ImageGallery value={textSearch} />
-
-
-
-      
-    
 
       
         <GlobalStyle />

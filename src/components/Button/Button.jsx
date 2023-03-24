@@ -1,11 +1,11 @@
 import { ButtonMore, ButtonCentre } from "./ButtonStyled"
 
-export const Button = ({text}) => {
+export const Button = ({onClick}) => {
     return (
 
 
         <ButtonCentre>
-             <ButtonMore type="button">{ text }</ButtonMore>
+            <ButtonMore onClick={onClick}>Load more</ButtonMore>
         </ButtonCentre>
 
        

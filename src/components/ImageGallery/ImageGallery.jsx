@@ -5,6 +5,7 @@ import { getImages } from "components/services/GetImages";
 import { threeDots } from "components/Loader/Loader";
 import { Button } from "components/Button/Button";
 import { toast } from "react-hot-toast";
+// import { ThreeDots } from "react-loader-spinner";
 
 
 
@@ -13,39 +14,40 @@ import { toast } from "react-hot-toast";
 export class ImageGallery extends Component {
 
     state = {
-        images: null,
-        // loading: false,
+        images: [],
+        loading: false,
         error: '',
-        // loadButton: false,
+        loadButton: false,
         page: 1,
         status: 'idle'
 
     }
 
 
-    componentDidUpdate(prevProps, prevState) { 
+    componentDidUpdate(prevProps, prevState) {
 
-      if (prevProps.value !== this.props.value
-            // || 
-            // prevProps.value == this.props.value
-        )
-       
-        {
-          this.setState({ status: 'pending' })
+        if (prevProps.value !== this.props.value
+            ||
+            prevState.page !== this.state.page) {
+            
+            this.setState({ loading: true })
          
           
-            getImages(this.props.value)
+            getImages(this.props.value, this.state.page)
                 .then((response) => response.json())
                 .then((images) => {
                     if (images.total === 0) {
-                    return Promise.reject(new Error (toast.error('Bad request')))
+                        return Promise.reject(new Error(toast.error('Bad request')))
                     }
                    
-                    this.setState({ images, status: 'resolved' })
+                    this.setState({
+                        images: [...this.state.images, ...images.hits]
+                    })
+                 
             
                     
                     if (images.hits.length !== 12) {
-                    return this.setState({ loadButton: false })
+                        return this.setState({ loadButton: false })
                     }
 
                     return this.setState({ loadButton: true });
@@ -53,43 +55,37 @@ export class ImageGallery extends Component {
                 })
                 
 
-          .catch((error)  => {
-                  console.log('error :>> ', error)
-              this.setState({error, status: 'rejected'})
-             })
-            
-     
-         }       
+                .catch((error) => {
+                    console.log('error :>> ', error)
+                    this.setState({ error, status: 'rejected' })
+                })
+                
           
-    }
+                .finally(() => {
+                    this.setState({ loading: false })
+                })
+        }
+          
+    };
 
-    addLoadPage = () => {
+    handleLoadPage = () => {
         this.setState((prevState) => {
-            return {page: prevState.page + 1}
-            
+            return {
+                page: prevState.page + 1
+            }
         });
     };
-        
-    // onLoadMoreBtn = () => {
-    // this.setState(prevState => ({
-    //   page: prevState.page + 1,
-    //   loading: true,
-    // }));
-
-
 
     render() {
-        
-        if (this.state.status === 'pending') {
-            return threeDots 
-        }
+    
+        return (
+
+            <ImageList className="gallery">
 
 
-        if (this.state.status === 'resolved') {
-
-          return    <ImageList className="gallery">
+                {this.state.loading && threeDots }
  
-                {this.state.images && this.state.images.hits.map((image) => {
+                {this.state.images && this.state.images.map((image) => {
 
                     return (
  
@@ -97,26 +93,20 @@ export class ImageGallery extends Component {
                             
                             image={image}
                             key={image.id}
-                            // src={image.webformatURL}
-                        /> 
+                        // src={image.webformatURL}
+                        />
  
                     )
                 })}
 
-              {this.state.loadButton && <Button text="Load more"
-              addPageClick={this.addLoadPage}
-              />}
+                {this.state.loadButton && <Button onClick={this.handleLoadPage} />}
        
 
             </ImageList>
-            
-        }
-
-        // if (this.state.status === 'rejected') {
-        //     return (<h2>{this.state.error }</h2>)
            
-        // }
-        
-    }
-};
+        )
+ 
+    };
+
+}
 

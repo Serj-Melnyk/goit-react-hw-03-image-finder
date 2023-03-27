@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-// import {
-//   Form as FormFormik,
-//   ErrorMessage as ErrorFormik,
-//   Field as FieldFormik,
-// } from 'formik';
-
 export const SearchHead = styled.header`
   top: 0;
   left: 0;
@@ -34,19 +28,6 @@ export const Form = styled.form`
   border-radius: 3px;
   overflow: hidden;
 `;
-
-// export const FormLabel = styled.label`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 4px;
-//   margin-bottom: 10px;
-//   width: 100%;
-//   background-color: #fff;
-//   border-radius: 2px;
-//   overflow: hidden;
-// `;
-
-// export const ErrorMessage = styled(ErrorFormik)``;
 
 export const Field = styled.input`
   display: inline-block;

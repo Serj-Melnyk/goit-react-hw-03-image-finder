@@ -9,7 +9,7 @@ import styled from 'styled-components';
 //   color: #010101;
 // `;
 
-export const Container = styled.div`
+export const Layout = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;

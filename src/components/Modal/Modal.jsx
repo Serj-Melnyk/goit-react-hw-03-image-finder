@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 import { Component } from "react";
 import { Overlay, ModalStyle } from "./ModalStyled"
 import { createPortal } from "react-dom";
@@ -36,12 +38,12 @@ export class Modal extends Component {
     };
 
     render() {
+        const {largeImage} = this.props
 
         return createPortal(<Overlay className="overlay" onClick={this.handleTabOverlay}>
 
             <ModalStyle className="modal">
-                {this.props.largeImageURL} 
-                {/* {this.props.children} */}
+                <img src={largeImage} alt="" />
             </ModalStyle>
                 
              </Overlay>, modalRoot);
@@ -49,3 +51,9 @@ export class Modal extends Component {
     }
 };
   
+
+Modal.propTypes = {
+    largeImage: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
+}

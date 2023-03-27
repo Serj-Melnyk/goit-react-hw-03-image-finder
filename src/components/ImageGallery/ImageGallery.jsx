@@ -5,7 +5,8 @@ import { getImages } from "components/services/GetImages";
 import { threeDots } from "components/Loader/Loader";
 import { Button } from "components/Button/Button";
 import { toast } from "react-hot-toast";
-// import { ThreeDots } from "react-loader-spinner";
+import PropTypes from "prop-types"
+
 
 
 
@@ -19,7 +20,6 @@ export class ImageGallery extends Component {
         error: '',
         loadButton: false,
         page: 1,
-        status: 'idle'
 
     }
 
@@ -30,22 +30,22 @@ export class ImageGallery extends Component {
             ||
             prevState.page !== this.state.page) {
             
-            this.setState({ loading: true })
+            this.setState({ loading: true , page: this.state.page})
          
           
             getImages(this.props.value, this.state.page)
                 .then((response) => response.json())
                 .then((images) => {
                     if (images.total === 0) {
-                        return Promise.reject(new Error(toast.error('Bad request')))
+                        return Promise.reject(new Error(toast.error('Incorrect request')))
                     }
                    
                     this.setState({
-                        images: [...this.state.images, ...images.hits]
+                        images: [...this.state.images, ...images.hits],
+                       
                     })
+
                  
-            
-                    
                     if (images.hits.length !== 12) {
                         return this.setState({ loadButton: false })
                     }
@@ -53,11 +53,11 @@ export class ImageGallery extends Component {
                     return this.setState({ loadButton: true });
                     
                 })
-                
+
 
                 .catch((error) => {
                     console.log('error :>> ', error)
-                    this.setState({ error, status: 'rejected' })
+                    this.setState({ error })
                 })
                 
           
@@ -76,11 +76,17 @@ export class ImageGallery extends Component {
         });
     };
 
+
     render() {
     
         return (
 
+            <div>
+              
+
             <ImageList className="gallery">
+
+              
 
 
                 {this.state.loading && threeDots }
@@ -89,24 +95,33 @@ export class ImageGallery extends Component {
 
                     return (
  
-                        <ImageGalleryItem
-                            
+                        <ImageGalleryItem   
                             image={image}
-                            key={image.id}
-                        // src={image.webformatURL}
-                        />
+                            key={image.id} />
  
                     )
                 })}
 
-                {this.state.loadButton && <Button onClick={this.handleLoadPage} />}
+                {this.state.loadButton
+                    && <Button onClick={this.handleLoadPage} />}
        
 
-            </ImageList>
+                </ImageList>
+                
+                </div>
            
         )
  
     };
 
+};
+
+
+ImageGallery.propTypes = {
+   value:  PropTypes.string.isRequired
+
 }
+
+
+
 

@@ -1,5 +1,6 @@
+import PropTypes from "prop-types"
 
-import { Form, Field, Button, SearchHead} from "./SearchbarStyled";
+import { SearchHead, Form, Field, Button, } from "./SearchbarStyled";
 import { GoSearch } from "react-icons/go";
 
 
@@ -11,7 +12,7 @@ export class Searchbar extends Component {
 
     state = {
         value: '',
-        page: 1,
+     
     }
 
 
@@ -22,28 +23,26 @@ export class Searchbar extends Component {
            
     }
 
+
     handleSubmit = (evt) => {
         evt.preventDefault()
         if (!this.state.value.trim()) {
             return toast.success('The search field is empty');
          
         }
+
         this.props.onSubmit(this.state.value)
-        this.setState({value : '', page: 1})
+        this.setState({value : '' })
         
     }
-    
-
-
 
     
     render() {
         
-
-
         return (
 
-            <SearchHead className="searchbar">
+            
+            <SearchHead >
 
                 <Form onSubmit={this.handleSubmit}>
                 
@@ -62,9 +61,16 @@ export class Searchbar extends Component {
 
                     />
                 </Form>
-            </SearchHead>
+
+                </SearchHead>
+
             
         );
     }
 };
+
+Searchbar.proppTypes = {
+    onChange: PropTypes.func.isRequired
+    
+}
 

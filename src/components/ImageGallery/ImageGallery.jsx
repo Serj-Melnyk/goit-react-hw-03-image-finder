@@ -28,7 +28,7 @@ export class ImageGallery extends Component {
 
         if (prevProps.value !== this.props.value
             ||
-            prevState.page !== this.state.page) {
+            (prevState.page !== this.state.page)) {
             
             this.setState({ loading: true , page: this.state.page})
          
@@ -50,7 +50,11 @@ export class ImageGallery extends Component {
                         return this.setState({ loadButton: false })
                     }
 
-                    return this.setState({ loadButton: true });
+                    this.setState({ loadButton: true });
+
+                    // if (prevProps.value === this.props.value) {
+                    //     this.setState({page: 1})
+                    // }
                     
                 })
 
@@ -84,7 +88,7 @@ export class ImageGallery extends Component {
             <div>
               
 
-            <ImageList className="gallery">
+            <ImageList>
 
               
 

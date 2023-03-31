@@ -16,12 +16,14 @@ export class Searchbar extends Component {
 
 
     handleChange = ({ target: { value } }) => {
-        // console.log(value);
    
-        this.setState({ value })
-           
+        this.setState({ value })    
     }
 
+
+    // handleChange = (evt) => {
+    //     this.setState({value : evt.currentTarget.value})
+    // }
 
     handleSubmit = (evt) => {
         evt.preventDefault()
@@ -33,14 +35,13 @@ export class Searchbar extends Component {
         this.props.onSubmit(this.state.value)
         this.setState({ value: '' })
         
-    }
+    };
 
     
     render() {
         
         return (
 
-            
             <SearchHead >
 
                 <Form onSubmit={this.handleSubmit}>
@@ -55,21 +56,18 @@ export class Searchbar extends Component {
                         aria-label="search"
                         placeholder="Search images and photos"
                         value={this.state.value}
-                        onChange={this.handleChange}
-                        
+                        onChange={this.handleChange} />
 
-                    />
                 </Form>
 
-                </SearchHead>
-
+             </SearchHead>
             
         );
     }
 };
 
-Searchbar.proppTypes = {
-    onChange: PropTypes.func.isRequired
+Searchbar.propTypes = {
+    onChange: PropTypes.func
     
 }
 

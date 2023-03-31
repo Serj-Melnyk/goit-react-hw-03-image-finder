@@ -9,9 +9,6 @@ import PropTypes from "prop-types"
 
 
 
-
-
-
 export class ImageGallery extends Component {
 
     state = {
@@ -27,14 +24,14 @@ export class ImageGallery extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
-        if (prevProps.value !== this.props.value)  {
-            this.setState(prev => ({
-                ...prev,
+        if (prevProps.value !== this.props.value) {
+            
+            this.setState({
                 images: [],
                 page: 1,
                 searchQuery: this.props.value,
 
-            }));
+            });
           }
         
 
@@ -42,7 +39,10 @@ export class ImageGallery extends Component {
                 ||
               (prevState.page !== this.state.page && this.state.page !== 1)) {
 
-                this.setState({ loading: true , page: this.state.page})
+                this.setState({
+                    loading: true,
+                    page: this.state.page
+                })
                 
             
 
@@ -64,10 +64,6 @@ export class ImageGallery extends Component {
                     }
 
                     this.setState({ loadButton: true });
-
-                    // if (prevProps.value === this.props.value) {
-                    //     this.setState({page: 1})
-                    // }
                     
                 })
 
@@ -99,15 +95,11 @@ export class ImageGallery extends Component {
         return (
 
             <div>
-              
 
-            <ImageList>
+                   {this.state.loading && threeDots }
 
-              
-
-
-                {this.state.loading && threeDots }
- 
+                <ImageList>
+                    
                 {this.state.images.length > 0 && this.state.images.map((image) => {
 
                     return (
@@ -119,10 +111,9 @@ export class ImageGallery extends Component {
                     )
                 })}
 
-                {this.state.loadButton
-                    && <Button onClick={this.handleLoadPage} />}
-       
-
+                {this.state.loadButton && this.state.images.length > 0
+                        && <Button onClick={this.handleLoadPage} />}
+             
                 </ImageList>
                 
                 </div>

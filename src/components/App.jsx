@@ -7,11 +7,7 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { Toaster } from "react-hot-toast";
 
 
-
-
-
 export class App extends Component {
-
 
   state = {
     textSearch: ''
@@ -30,7 +26,6 @@ export class App extends Component {
 
     return (
 
-      
       <Layout>  
 
         <Toaster

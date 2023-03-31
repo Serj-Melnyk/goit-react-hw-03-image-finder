@@ -25,7 +25,7 @@ export class App extends Component {
   
   render() {
     
-    const { textSearch } = this.state
+    const { textSearch} = this.state
 
 
     return (

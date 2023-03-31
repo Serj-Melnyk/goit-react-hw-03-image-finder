@@ -11,8 +11,7 @@ import { toast } from "react-hot-toast";
 export class Searchbar extends Component {
 
     state = {
-        value: '',
-     
+        value: ''     
     }
 
 
@@ -32,7 +31,7 @@ export class Searchbar extends Component {
         }
 
         this.props.onSubmit(this.state.value)
-        this.setState({value : '' })
+        this.setState({ value: '' })
         
     }
 

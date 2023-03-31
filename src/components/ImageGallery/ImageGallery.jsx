@@ -15,25 +15,38 @@ import PropTypes from "prop-types"
 export class ImageGallery extends Component {
 
     state = {
+        searchQuery: '',
         images: [],
         loading: false,
         error: '',
         loadButton: false,
-        page: 1,
+        page: null,
 
     }
 
 
     componentDidUpdate(prevProps, prevState) {
 
-        if (prevProps.value !== this.props.value
-            ||
-            (prevState.page !== this.state.page)) {
+        if (prevProps.value !== this.props.value)  {
+            this.setState(prev => ({
+                ...prev,
+                images: [],
+                page: 1,
+                searchQuery: this.props.value,
+
+            }));
+          }
+        
+
+            if (prevState.searchQuery !== this.state.searchQuery
+                ||
+              (prevState.page !== this.state.page && this.state.page !== 1)) {
+
+                this.setState({ loading: true , page: this.state.page})
+                
             
-            this.setState({ loading: true , page: this.state.page})
-         
-          
-            getImages(this.props.value, this.state.page)
+
+             getImages(this.props.value, this.state.page)
                 .then((response) => response.json())
                 .then((images) => {
                     if (images.total === 0) {
@@ -68,7 +81,7 @@ export class ImageGallery extends Component {
                 .finally(() => {
                     this.setState({ loading: false })
                 })
-        }
+            }
           
     };
 
@@ -95,7 +108,7 @@ export class ImageGallery extends Component {
 
                 {this.state.loading && threeDots }
  
-                {this.state.images && this.state.images.map((image) => {
+                {this.state.images.length > 0 && this.state.images.map((image) => {
 
                     return (
  
